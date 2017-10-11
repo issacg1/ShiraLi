@@ -1,40 +1,61 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .player{
-  height: 50px;
-  width: 100px;
-  background-color: black;
+  height: 80px;
+  width: 100%;
+  background-color: rgb(80, 60, 60);
   padding-top: 2%;
 }
 
 .player > a {
-  padding-right: 10px;
-
+  height: 100%;
+  padding-top: 1.5%;
+  padding-right: 15px;
+  float: left;
+  text-align: center;
+  color: white;
+  /* border: solid white 2px;
+  border-radius: 50%; */
 }
+
+.player > a:hover{
+  color: rgb(8, 34, 77);
+}
+
+.imageContain{
+  height: 100%;
+  padding-right: 5%;
+  margin-left: 2%;
+  float: left;
+}
+.playerImage{
+  height: 80%;
+}
+
+.progress{
+  position: absolute;
+  top: 34px;
+  left: 290px;
+  background: rgb(18, 18, 18);
+  right: 90px;
+  bottom: 635px;
+  box-sizing: border-box
+  padding 0 5px;
+  cursor: pointer
+}
+
+.progress > .bar{
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+}
+
+.progress > .bar > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: white;
+}
+
