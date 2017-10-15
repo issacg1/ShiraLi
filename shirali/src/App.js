@@ -17,6 +17,7 @@ class App extends Component {
       playIcon: 'fa fa-play fa-2x',
       progress: 0.0,
       in_set_progress_mode: false,
+      backwardSongClicks: 0,
     }
     this.is_progress_dirty = false;
     this.interval_id = setInterval(this.onUpdate.bind(this), 250);
@@ -73,16 +74,29 @@ class App extends Component {
   }
 
   backwardSong(){
+    let updatedClicks = this.state.backwardSongClicks + 1
+    this.setState({
+      backwardSongClicks: updatedClicks
+    })
+
     let current = this.state.currentSong
     current -= 1
-    let songLength = this.state.file.length - 1
-    if(current >= 0){
+    if(this.state.backwardSongClicks === 0){
       this.setState({
-        currentSong: current,
+        progress: 0.0,
       })
-      this.refs.player.src = this.state.file[current]
-    }else{
-      console.log("end of songs!")
+      this.refs.player.currentTime = 0;
+    } else {
+      if(current >= 0){
+        this.setState({
+          currentSong: current,
+          backwardSongClicks: 0,
+        })
+        this.refs.player.src = this.state.file[current]
+      }else{
+        this.refs.player.pause();
+        console.log("end of songs!")
+      }
     }
   }
 
@@ -96,6 +110,7 @@ class App extends Component {
       })
       this.refs.player.src = this.state.file[current]
     }else{
+      this.refs.player.src = ""
       console.log("end of songs!")
     }
   }
@@ -123,7 +138,7 @@ class App extends Component {
       in_set_progress_mode: false
     })
   }
-  
+
   onUpdate(){
     var player = this.refs.player;
       if(player && !this.is_progress_dirty){
