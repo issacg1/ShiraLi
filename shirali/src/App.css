@@ -59,3 +59,19 @@
   background: white;
 }
 
+.currentTime{
+  position: absolute;
+  float: left;
+  top: 40px;
+  left: 245px;
+  color: white;
+}
+
+.timeRemaining{
+  position: absolute;
+  float: right;
+  right: 40px;
+  top: 40px;
+  color: white;
+}
+
