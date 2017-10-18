@@ -1,14 +1,23 @@
+.player-container{
+  height: 100px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1px;
+}
+
 .player{
+  position: fixed;
   height: 80px;
   width: 100%;
-  background-color: rgb(80, 60, 60);
+  background-color: rgb(21, 5, 5);
   padding-top: 2%;
 }
 
 .player > a {
   height: 100%;
   padding-top: 1.5%;
-  padding-right: 15px;
+  padding-right: 20px;
   float: left;
   text-align: center;
   color: white;
@@ -22,7 +31,7 @@
 
 .imageContain{
   height: 100%;
-  padding-right: 5%;
+  padding-right: 1%;
   margin-left: 2%;
   float: left;
 }
@@ -31,19 +40,27 @@
 }
 
 .progress{
-  position: absolute;
-  top: 34px;
+  /* position: absolute; */
+  top: 50px;
   left: 290px;
-  background: rgb(18, 18, 18);
+  height: 50px;
+  width: 50vw;
+  margin: auto;
+  background: rgb(57, 42, 42);
   right: 90px;
-  bottom: 635px;
+  bottom: 620px;
   box-sizing: border-box
   padding 0 5px;
   cursor: pointer
 }
 
+.timePlayerContain{
+  display: inline-flex;
+  width: 60%;
+}
+
 .progress > .bar{
-  position: absolute;
+  /* position: absolute; */
   left: 5px;
   right: 5px;
   top: 5px;
@@ -51,27 +68,32 @@
 }
 
 .progress > .bar > div {
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   top: 0;
+  height: 50px;
   bottom: 0;
   width: 50%;
-  background: white;
+  background: purple;
 }
 
 .currentTime{
-  position: absolute;
+  /* position: absolute; */
   float: left;
-  top: 40px;
+  top: 55px;
   left: 245px;
   color: white;
+  padding: 32px;
 }
 
 .timeRemaining{
-  position: absolute;
-  float: right;
+  /* position: absolute; */
+  float: left;
   right: 40px;
-  top: 40px;
+  padding: 32px;
+  top: 55px;
   color: white;
 }
+
+
 
