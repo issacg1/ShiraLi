@@ -7,13 +7,14 @@ class Player extends Component{
         super()
         this.state = {
           rez: null,
-          file: ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3","https://shiralidevelopment.s3-us-west-1.amazonaws.com/59a6010f0afc7020b7ccee0c/Despacito+%5BHebrew+Version%5D%281%29_1504051553255.mp3"],
-          currentSong: 0,
+          file: [],
+          artwork: [],
           play: false,
           playIcon: 'fa fa-play fa-2x',
           progress: 0.0,
           in_set_progress_mode: false,
           backwardSongClicks: 0,
+          currentSong: null,
         }
         this.is_progress_dirty = false;
         this.interval_id = setInterval(this.onUpdate.bind(this), 250);
@@ -34,29 +35,69 @@ class Player extends Component{
             'userid': '59d5c5b2e309815fada7875a'
             }
         }).then(data =>{
+        console.log(data.data.songs[10])
+            let files = [];
+            let artworks = [];  
+        data.data.songs.forEach(function(data) {
+              files.push(data.song_original_fileurl)
+              if(data.albums[0]){
+                artworks.push(data.albums[0].artwork)
+              }else{
+                artworks.push(data.artwork)
+              }
+          }, this);
           this.setState({
-              rez: data
-          })
-          console.log(this.state.rez.data)
+            rez: data,
+            file: files,
+            artwork: artworks
+            })
         }).catch(err =>{
           console.log(err)
         })
+
+        // axios({
+        //     method:'GET',
+        //     url: "https://shiralidevelopment.s3-us-west-1.amazonaws.com/59a6010f0afc7020b7ccee0c/Despacito%20cover%20photo_1504051563508.octet-stream",
+        //     responseType: 'blob',
+        // }).then(data =>{
+        //     // console.log(data.data)
+        //     // let img = atob(data.data)
+        //     console.log(data)
+
+        // }).catch(err =>{
+        //     console.log(err)
+        // })
       }
     
       play(){
+        if(this.refs.player && this.refs.player.src !== ""){
         if(this.state.play === false){
-          this.setState({
-            play: true,
-          })
+            if(this.state.currentSong === null){
+                this.setState({
+                    play: true,
+                    currentSong: 0
+                })
+            }else{
+                this.setState({
+                    play: true
+                })
+            }
           this.refs.player.play();
-        }else{
+        } else{
           this.refs.player.pause()
           this.setState({
             play: false
           })
-        }
-        this.correctIcon()
+        }  
+      } else{
+          this.refs.player.src = this.state.file[0]
+          this.refs.player.play()
+          this.setState({
+            play: true,
+          })
       }
+      this.correctIcon()
+    }
     
       correctIcon(){
         if(this.state.play){
@@ -101,14 +142,15 @@ class Player extends Component{
         let current = this.state.currentSong
         current += 1
         let songLength = this.state.file.length - 1
+        // debugger
         if(songLength >= current){
           this.setState({
             currentSong: current,
           })
-          this.refs.player.src = this.state.file[current]
+          this.refs.player.src = this.state.file[current]                
         }else{
-          this.refs.player.src = ""
-          console.log("end of songs!")
+					this.refs.player.src = ""
+					console.log("end of songs!")
         }
       }
     
@@ -144,7 +186,7 @@ class Player extends Component{
             })
           }
         }
-    
+            
       render(){
         var currentTime = 0;
         var totalTime = 0;
@@ -158,18 +200,19 @@ class Player extends Component{
     
           if(this.is_progress_dirty){
             this.is_progress_dirty = false;
-            player.currentTime = player.duration * this.state.progress;
+            player.currentTime = player.duration * this.state.progress;  
           }
     
           currentTime = player.currentTime
-          totalTime = player.duration
+          totalTime = player.duration - player.currentTime
+
         }
     
         return(
           <div className="player-container">
             <div className="player">
               <div className="imageContain">
-                <img className="playerImage" src="https://images.rapgenius.com/797d59cbc13dfd824c1e40ad64e7286b.400x400x1.jpg" alt=""/>
+                <img ref="img" className="playerImage" src={this.state.artwork[this.state.currentSong]} alt=" "/>
               </div>
               <a onClick={this.backwardSong} href="#0"><i className='fa fa-backward fa-2x' aria-hidden="true"></i></a>
               <a onClick={this.play} href="#0"><i className={this.state.playIcon} aria-hidden="true"></i></a>
