@@ -1,5 +1,7 @@
 # ShiraLi
-This project is a web app for ShiraLi. The appilication is a music streaming platform that allows users to login using the same credentials they created on the app or credentials they created on the web. User's can stream music as well as search or choose a song that has been suggested to them. 
+Solely working on the web app for ShiraLi. The web application will allow users to utilize the same functionality
+available on the mobile applications. Users will be able to login with the same credentials created on the app or
+create a new profile. They can then stream all their favorite Jewish music in one clean and easy to use platform.
 
 # Wireframes
 1st round:
