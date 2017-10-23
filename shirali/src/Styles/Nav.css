@@ -1,10 +1,11 @@
 .nav{
-    position: absolute;
+    position: fixed;
     width:90vw;
     height: 10vh;
     background-color: rgb(63, 42, 42);
     top: 0px;
     margin-left: 20%;
+    z-index: 3;
 }
 
 .navContain{

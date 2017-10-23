@@ -1,5 +1,5 @@
 .sidebar{
-	position: relative;
+	position: fixed;
 	height: 85.5vh;
 	width: 20vw;
 	background-color: rgb(63, 42, 42);

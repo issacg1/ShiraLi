@@ -15,11 +15,11 @@ class Sidebar extends Component{
 			<div className="sidebar">
 				<img href="" />
 				<div className="search">
-					<a href="#0" className="searchLink"><i className="fa fa-search" aria-hidden="true"></i>SEARCH</a>
+					<a href="/search" className="searchLink"><i className="fa fa-search" aria-hidden="true"></i>SEARCH</a>
 				</div>
 				<div className="mainLinks">
-					<a href="#0" className="homeLink"><i className="fa fa-music" aria-hidden="true"></i>HOME</a>
-					<a href="#0" className="myMusicLink"><i className="fa fa-music" aria-hidden="true"></i>MY MUSIC</a>
+					<a href="/" className="homeLink"><i className="fa fa-music" aria-hidden="true"></i>HOME</a>
+					<a href="/my_music" className="myMusicLink"><i className="fa fa-music" aria-hidden="true"></i>MY MUSIC</a>
 				</div>
 				<hr />
 				<div className="recent">

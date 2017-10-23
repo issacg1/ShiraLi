@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Player from './Components/Player';
 import Sidebar from './Components/Sidebar';
 import Nav from './Components/Nav';
+import Genres from './Components/Genres';
+import Search from './Components/Search';
 
 
 
@@ -24,18 +26,25 @@ class App extends Component {
   }
 
   pageLayout({children}){
-    return <div><Player /><Sidebar /><Nav />{children}</div>
+    return <div><Player route={this.route} sendData={this.sendData} /><Sidebar /><Nav />{children}</div>
     
   }
 
+  
+
+  
+
+
   render() {
     return (
-      <div>
-        <Router>
-            <Route path="/" component={this.pageLayout} />
-            
-        </Router>
-      </div>
+      <Router>
+        <div>
+          <Route path="/" component={this.pageLayout} />
+          <Route path="/genres" component={Genres} />
+          <Route exact path="/search" component={Search} />
+         
+        </div>
+      </Router>
     );
   }
 }

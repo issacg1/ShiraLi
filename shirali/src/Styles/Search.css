@@ -1,0 +1,25 @@
+.searchPage{
+    position: relative;
+    height: 75%;
+    max-width: 80.1%;
+    left: 255px;
+    top: 49px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+
+.inputContain{
+    width: 100%;
+    height: 25%;
+    background: black;
+
+}
+
+.searchInput{
+    width: 25%;
+}
+
+h4{
+    color: white;
+}

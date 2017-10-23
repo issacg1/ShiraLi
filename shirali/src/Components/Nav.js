@@ -8,7 +8,7 @@ class Nav extends Component{
 			<div className="nav">
 				<div className="navContain">
 					<a href="#0" className="navLink">FEATURED</a>
-					<a href="#0" className="navLink">GENRES</a>
+					<a href="/genres" className="navLink">GENRES</a>
 					<a href="#0" className="navLink">RECOMMENDED</a>
 					<a href="#0" className="navLink">PLAYLISTS</a>
 				</div>

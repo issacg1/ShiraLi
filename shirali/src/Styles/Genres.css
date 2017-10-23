@@ -1,0 +1,47 @@
+.genreList{
+    position: absolute;
+    height: 75%;
+    width: 80%;
+    left: 250px;
+    top: 70px;
+    overflow: scroll;
+}
+
+.imageContain > div{
+    height: 35%;
+    float: left;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+.image{
+    height: 200px;
+    width: 250px;
+}
+
+.image:hover{
+    box-shadow: 1px 1px 1px 1px black;
+    border-radius: 10px;
+}
+
+.image:active{
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.genre{
+    text-align: center;
+    font-size: 100%;
+}
+
+.headerCopy{
+    margin-left: 320px;
+    margin-top: 2.5%;
+}

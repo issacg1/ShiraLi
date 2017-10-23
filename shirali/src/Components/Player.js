@@ -6,6 +6,7 @@ class Player extends Component{
     constructor(){
         super()
         this.state = {
+          dataLoaded: false,
           rez: null,
           file: [],
           artwork: [],
@@ -14,7 +15,12 @@ class Player extends Component{
           progress: 0.0,
           in_set_progress_mode: false,
           backwardSongClicks: 0,
-          currentSong: null,
+					currentSong: 0,
+					volume: 1,
+					artist: [],
+          title: [],
+          relaod: true,
+          volumeIcon: "fa fa-volume-up",
         }
         this.is_progress_dirty = false;
         this.interval_id = setInterval(this.onUpdate.bind(this), 250);
@@ -37,9 +43,13 @@ class Player extends Component{
         }).then(data =>{
         console.log(data.data.songs[10])
             let files = [];
-            let artworks = [];  
+						let artworks = [];
+						let artist = []; 
+						let title = []; 
         data.data.songs.forEach(function(data) {
-              files.push(data.song_original_fileurl)
+							files.push(data.song_original_fileurl)
+							title.push(data.title)
+							artist.push(data.artist.name)
               if(data.albums[0]){
                 artworks.push(data.albums[0].artwork)
               }else{
@@ -49,8 +59,13 @@ class Player extends Component{
           this.setState({
             rez: data,
             file: files,
-            artwork: artworks
-            })
+						artwork: artworks,
+						artist: artist,
+            title: title,
+            relaod: false,
+            dataLoaded: true,
+						})
+						this.props.sendData(this.state.rez)
         }).catch(err =>{
           console.log(err)
         })
@@ -142,7 +157,6 @@ class Player extends Component{
         let current = this.state.currentSong
         current += 1
         let songLength = this.state.file.length - 1
-        // debugger
         if(songLength >= current){
           this.setState({
             currentSong: current,
@@ -185,7 +199,47 @@ class Player extends Component{
               progress: player.currentTime / player.duration
             })
           }
+				}
+				
+				volumeChange(e){
+					let volume = parseFloat(e.target.value)
+					let player = this.refs.player
+					this.setState({
+						volume: volume
+					})
+          player.volume = this.state.volume
+          this.correctVolumeIcon()
         }
+
+        correctVolumeIcon(){
+          if(this.state.volume > 0.50){
+            this.setState({ volumeIcon:"fa fa-volume-up"})
+          } else if (this.state.volume > 0.00 && this.state.volume < 0.50){
+            this.setState({ volumeIcon: "fa fa-volume-down" })
+          } else if(this.state.volume === 0.00){
+            this.setState({ volumeIcon: "fa fa-volume-off" })
+          }
+          // add click logic to mute
+        }
+        
+      //   componentWillMount(){
+      //     console.log(this.route)
+      //     this.unregisterLeaveHook = this.props.route.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this));
+      //   }
+
+      //   routerWillLeave(nextLocation) {
+      //     return false;        
+      //   }
+
+      //   componentWillUnmount() {
+      //     this.unregisterLeaveHook();
+      // }
+
+      // shouldComponentUpdate(nextProps){ 
+      //   //console.log(this.state.relaod,'relaod')
+      //   return this.state.relaod
+       
+      // }
             
       render(){
         var currentTime = 0;
@@ -196,10 +250,10 @@ class Player extends Component{
           player.onended = () =>{
             this.nextSong();
           }
-        
     
           if(this.is_progress_dirty){
-            this.is_progress_dirty = false;
+						this.is_progress_dirty = false;
+						if(this.state.progress)
             player.currentTime = player.duration * this.state.progress;  
           }
     
@@ -212,9 +266,13 @@ class Player extends Component{
           <div className="player-container">
             <div className="player">
               <div className="imageContain">
-                <img ref="img" className="playerImage" src={this.state.artwork[this.state.currentSong]} alt=" "/>
+                <img ref="img" className="playerImage" src={this.state.artwork[this.state.currentSong]} alt={this.state.artist[this.state.currentSong]}/>
               </div>
-              <a onClick={this.backwardSong} href="#0"><i className='fa fa-backward fa-2x' aria-hidden="true"></i></a>
+							<div className="songData">
+								<p className="artistName">{this.state.artist[this.state.currentSong]}</p>
+              	<p className="songName">{this.state.title[this.state.currentSong]}</p>
+							</div>
+							<a onClick={this.backwardSong} href="#0"><i className='fa fa-backward fa-2x' aria-hidden="true"></i></a>
               <a onClick={this.play} href="#0"><i className={this.state.playIcon} aria-hidden="true"></i></a>
               <a onClick={this.nextSong} href="#0"><i className='fa fa-forward fa-2x' aria-hidden="true"></i></a>
             <div className="timePlayerContain">
@@ -229,14 +287,19 @@ class Player extends Component{
                 className="progress">
                 <div ref="progress_bar" className="bar">
                     <div style={{width: (this.state.progress * 100) + '%'}}></div>
+										<i className="fa fa-circle" style={{marginLeft: (this.state.progress * 100) + '%'}}></i>
                 </div>
                 </div>
                 <div className="timeRemaining">
                 {formatTime(totalTime)}
                 </div>
+                <div className="volumeIcon">
+                  <i className={this.state.volumeIcon} aria-hidden="true"></i>
+								</div>
+                <input type="range" min="0" max="1" step="0.01" value={this.state.volume} onChange={e =>{this.volumeChange(e)}}/>
             </div>
             <audio ref="player" autoPlay={this.state.play}>
-            <source src={this.state.file[0]} />
+              <source src={this.state.file[0]} />
             </audio>
             </div>
           </div>
