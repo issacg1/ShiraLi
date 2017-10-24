@@ -214,9 +214,9 @@ class Player extends Component{
         correctVolumeIcon(){
           if(this.state.volume > 0.50){
             this.setState({ volumeIcon:"fa fa-volume-up"})
-          } else if (this.state.volume > 0.00 && this.state.volume < 0.50){
+          } else if (this.state.volume > 0.02 && this.state.volume < 0.50){
             this.setState({ volumeIcon: "fa fa-volume-down" })
-          } else if(this.state.volume === 0.00){
+          } else if(this.state.volume  <=0.02){
             this.setState({ volumeIcon: "fa fa-volume-off" })
           }
           // add click logic to mute
@@ -253,8 +253,9 @@ class Player extends Component{
     
           if(this.is_progress_dirty){
 						this.is_progress_dirty = false;
-						if(this.state.progress)
-            player.currentTime = player.duration * this.state.progress;  
+						if(typeof this.state.progress === "number"){
+              player.currentTime = player.duration * this.state.progress;  
+            }
           }
     
           currentTime = player.currentTime

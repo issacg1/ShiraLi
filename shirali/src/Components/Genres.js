@@ -7,6 +7,7 @@ class Genres extends Component{
         super()
         this.state = {
 					dataLoaded: false,
+					_ids: null,
 					genres: null,
 					icons: undefined,
 				}
@@ -23,17 +24,20 @@ class Genres extends Component{
 						'userid': '59d5c5b2e309815fada7875a'
 						}
 			}).then(data =>{
-				console.log(data)
+				console.log(data.data.genres[0]._id)
 				let genres = [];
 				let icons = [];
+				let ids = [];
 				data.data.genres.forEach(function(genre) {
 					genres.push(genre.title)
 					icons.push(genre.icon)
+					ids.push(genre._id)
 				}, this);
 				this.setState({
 					genres: genres,
 					icons: icons,
 					dataLoaded: true,
+					_ids: ids
 				})
 			}).catch(err =>{
 				console.log(err)
@@ -44,7 +48,7 @@ class Genres extends Component{
 		return this.state.icons.map((icon, i) =>{
 			return (
 				<div>
-				<img className="image" src={icon} name={this.state.genres[i]} onClick={(e) => {this.handleSearch(e)}}></img> 
+				<img className="image" src={icon} name={this.state._ids[i]} onClick={(e) => {this.handleSearch(e)}}></img> 
 				<p className="genre">{this.state.genres[i]}</p>
 				</div>
 			)
