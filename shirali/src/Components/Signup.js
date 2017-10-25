@@ -58,8 +58,10 @@ class Signup extends Component{
 
 	render(){
 			return(
-					<div>
-						<form>
+				<div className="mainContain">
+					<div className="formContain">
+						<h2>Sign up!</h2>
+						<form className="signupForm">
 							<label>First Name</label>
 							<input placeholder="First Name" type="text" name="firstname" value={this.state.firstname} onChange={e =>{this.handleInputChange(e)}}/>
 							<label>Last Name</label>
@@ -68,11 +70,12 @@ class Signup extends Component{
 							<input placeholder="Email" type="email" name="email" value={this.state.email} onChange={e =>{this.handleInputChange(e)}}/>
 							<label>Password</label>
 							<input placeholder="Password" type="password" name="password" value={this.state.password} onChange={e =>{this.handleInputChange(e)}}/>
-							<button onClick={event =>{this.handleFormSubmit(event)}}>Create Account</button>
+							<button className="signupButton" onClick={event =>{this.handleFormSubmit(event)}}>Create Account</button>
+							<p><Link to={`/login`}>Have an account? Login here!</Link></p>
 						</form>
 						{this.state.fireRedirect ? <Redirect push to={`/live`} /> : ''}	
-						<p><Link to={`/login`}>Have an account? Login here!</Link></p>
 					</div>
+				</div>
 			)
 	}
 }

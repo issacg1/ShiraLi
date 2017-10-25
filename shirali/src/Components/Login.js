@@ -39,7 +39,14 @@ class Login extends Component{
 				},
 				
 			}).then(data =>{
+				debugger
 				console.log(data)
+				if(data.data.success){
+					this.props.sendLogin(data)
+					this.setState({
+						fireRedirect: true
+					})
+				}
 			}).catch(err =>{console.log(err)})
 		}
 
@@ -47,8 +54,9 @@ class Login extends Component{
 	render(){
 		return(
 			<div className="login">
-				<div className="form">
+				<div className="loginformContain">
 					<form className="loginForm" onSubmit={(event)=> {this.handleFormSubmit(event)}}>
+						<h2>Login In</h2>
 						<label>
 							Email
 						</label>
@@ -57,11 +65,11 @@ class Login extends Component{
 							Password
 						</label>
 						<input name="password" placeholder="Password" type="password" value={this.state.password} onChange={(event)=> {this.handleInputChange(event)}}/>
-						<input className="submit" type="submit" value="Log In" />
+						<button className="loginButton" onClick={event =>{this.handleFormSubmit(event)}}>Login in</button>
+						<p><Link to={`/signup`}>Don't have an account? Register here!</Link></p>
 					</form>
 				</div>
 				{this.state.fireRedirect ? <Redirect push to={`/live`} /> : ''}
-				<p><Link to={`/signup`}>Don't have an account? Register here!</Link></p>
 			</div>
 		)
 	}

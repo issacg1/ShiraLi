@@ -1,0 +1,48 @@
+.login{
+    height: 60vh; 
+    width: 100vw;
+    background-color: rgb(82, 20, 20);
+    margin-top: 0%;
+}
+
+.loginformContain{
+    height: 100%; 
+    width: 50%;
+    background-color: rgb(63, 42, 42);
+    margin-left: 25%;
+    margin-top: 10%;
+    box-shadow: 10px 10px 10px 10px black;
+}
+
+.loginForm{
+    margin-left: 35%;
+    height: 100%;
+    width: 35%;
+    display: inline-flex;
+    flex-direction: column;
+    color: white;
+    font-weight: bold;
+}
+
+.loginForm > input {
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.loginButton{
+    margin-top: 10%;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.loginForm > h2{
+    text-align: center;
+    color: white;
+    padding-top: 5%;
+    margin-bottom: 50px;
+}
+
+.loginForm > p {
+    text-align: center;
+}

@@ -7,7 +7,7 @@ class Nav extends Component{
     return(
 			<div className="nav">
 				<div className="navContain">
-					<a href="#0" className="navLink">FEATURED</a>
+					<a href="/live/featured" className="navLink">FEATURED</a>
 					<a href="/live/genres" className="navLink">GENRES</a>
 					<a href="#0" className="navLink">RECOMMENDED</a>
 					<a href="#0" className="navLink">PLAYLISTS</a>
