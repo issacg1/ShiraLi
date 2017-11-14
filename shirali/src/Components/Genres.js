@@ -6,12 +6,12 @@ class Genres extends Component{
     constructor(){
         super()
         this.state = {
-					dataLoaded: false,
-					_ids: null,
-					genres: null,
-					icons: undefined,
-				}
-				this.renderIcons.bind(this);
+			dataLoaded: false,
+			_ids: null,
+			genres: null,
+			icons: undefined,
+		}
+		this.renderIcons.bind(this);
     }
 
 	componentDidMount(){
@@ -67,12 +67,12 @@ class Genres extends Component{
 
     render(){
         return(
-            <div className="genreList">
-							<h1 className="headerCopy">Genres & Moods</h1>
-							<div className="imageContain">
-              	{this.state.dataLoaded ? this.renderIcons() : ""}
-							</div>
-						</div>
+      <div className="genreList">
+				<h1 className="headerCopy">Genres & Moods</h1>
+				<div className="imageContain">
+        {this.state.dataLoaded ? this.renderIcons() : ""}
+				</div>
+			</div>
         )
     }
 

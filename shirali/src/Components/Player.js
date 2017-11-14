@@ -19,8 +19,9 @@ class Player extends Component{
 					volume: 1,
 					artist: [],
           title: [],
-          relaod: true,
+          relaod: false,
           volumeIcon: "fa fa-volume-up",
+          getagain: true,
         }
         this.is_progress_dirty = false;
         this.interval_id = setInterval(this.onUpdate.bind(this), 250);
@@ -31,7 +32,8 @@ class Player extends Component{
         this.setProgress = this.setProgress.bind(this);
       }
     
-      componentDidMount(){
+      componentWillMount(){
+        if(this.state.getagain)
         axios({
           method: 'GET',
           url: 'http://localhost:3001/api/v1/song/active',
@@ -64,6 +66,7 @@ class Player extends Component{
             title: title,
             relaod: false,
             dataLoaded: true,
+            getagain: false,
 						})
 						this.props.sendData(this.state.rez)
         }).catch(err =>{
@@ -235,9 +238,9 @@ class Player extends Component{
       //     this.unregisterLeaveHook();
       // }
 
-      // shouldComponentUpdate(nextProps){ 
+      // shouldComponentUpdate(nextProps, nextState){ 
       //   //console.log(this.state.relaod,'relaod')
-      //   return this.state.relaod
+      //   return false;
        
       // }
             
@@ -288,7 +291,7 @@ class Player extends Component{
                 className="progress">
                 <div ref="progress_bar" className="bar">
                     <div style={{width: (this.state.progress * 100) + '%'}}></div>
-										<i className="fa fa-circle" style={{marginLeft: (this.state.progress * 100) + '%'}}></i>
+										<i className="fa fa-circle circle" style={{marginLeft: (this.state.progress * 100) - 2 + '%'}}></i>
                 </div>
                 </div>
                 <div className="timeRemaining">

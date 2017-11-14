@@ -109,6 +109,11 @@
   color: white;
 }
 
+.circle{
+  height: 25px;
+
+}
+
 .volumeIcon{
   height: 100%;
   padding-top: 4.2%;
@@ -117,6 +122,6 @@
   float: left;
   text-align: center;
   color: white;
-  cursor: pointer
+  cursor: pointer;
 }
 

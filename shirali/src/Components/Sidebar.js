@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/Sidebar.css';
+import { Link } from 'react-router-dom'
 
 
 class Sidebar extends Component{
@@ -13,13 +14,13 @@ class Sidebar extends Component{
 	render(){
 		return(
 			<div className="sidebar">
-				<img href="" />
+				{/* <img href="" /> */}
 				<div className="search">
-					<a href="/live/search" className="searchLink"><i className="fa fa-search" aria-hidden="true"></i>SEARCH</a>
+					<Link to="/live/search" className="searchLink"><i className="fa fa-search" aria-hidden="true"></i>SEARCH</Link>
 				</div>
 				<div className="mainLinks">
-					<a href="/live" className="homeLink"><i className="fa fa-music" aria-hidden="true"></i>HOME</a>
-					<a href="/live/my_music" className="myMusicLink"><i className="fa fa-music" aria-hidden="true"></i>MY MUSIC</a>
+					<Link to="/live" className="homeLink"><i className="fa fa-music" aria-hidden="true"></i>HOME</Link>
+					<Link to="/live/my_music" className="myMusicLink"><i className="fa fa-music" aria-hidden="true"></i>MY MUSIC</Link>
 				</div>
 				<hr />
 				<div className="recent">
@@ -27,7 +28,7 @@ class Sidebar extends Component{
 				</div>
 				<div className="user">
 					<hr />
-					<a href="#0" className="userLink">add user name here</a>
+					<Link to="#0" className="userLink">add user name here</Link>
 				</div>
 			</div>
 		)
